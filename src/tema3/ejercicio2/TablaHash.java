@@ -175,6 +175,37 @@ public class TablaHash<C, V> implements Map<C, V> {
     }
 
     /**
+     * Ejercicio 2.1
+     * Inserta la entrada (c, v) a una Tabla Hash
+     * Dada una Entrada con la clave c, devuelva el número de colisiones provocadas por su posición
+     * @param c, clave entrada a comprobar
+     *
+     * @return el número de colisiones asociadas a esa entrada
+     */
+    public int numeroColisiones(C c) {
+        return elArray[indiceHash(c)].talla();
+    }
+
+    /**
+     * Ejercicio 2.3
+     * Dado un valor determinado, devuelve una ListaConPI con todas las claves que tienen asociado ese valor.
+     *
+     * @param v, valor a comprobar
+     *
+     * @return ListaConPI de claves asociadas a ese valor
+     */
+    public ListaConPI<C> clavesConValor(V v) {
+        ListaConPI<C> res = new LEGListaConPI<>();
+        for (ListaConPI<EntradaHash<C,V>> cubeta : elArray) {
+            for (cubeta.inicio(); !cubeta.esFin(); cubeta.siguiente()) {
+                EntradaHash<C, V> entrada = cubeta.recuperar();
+                if (entrada.valor.equals(v)) res.insertar(entrada.clave);
+            }
+        }
+        return res;
+    }
+
+    /**
      * Representa un elemento de la Lista con PI que implementa
      * una cubeta de una TablaHash, esto es una Entrada o par
      * (clave, valor)
